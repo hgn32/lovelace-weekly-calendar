@@ -8,7 +8,7 @@ It doesn't work.
 ## How to use
 
 ```yaml
-- url: https://raw.githubusercontent.com/hgn32/weekly-calendar/master/weekly_calendar.js
+- url: https://raw.githubusercontent.com/hgn32/weekly-calendar/master/weekly-calendar.js
   type: js
 ```
 
