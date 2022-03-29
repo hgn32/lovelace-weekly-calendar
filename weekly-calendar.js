@@ -58,7 +58,6 @@ class WeeklyCalendar extends HTMLElement {
         }`;
     }
     this.content.innerHTML = `
-          .weekday
         </style>
       `;
   }
