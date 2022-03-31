@@ -1,4 +1,4 @@
-import { customElement, LitElement, state } from "lit-element";
+import { customElement, LitElement, property, state } from "lit-element";
 import {
   HomeAssistant,
   LovelaceCard,
@@ -8,16 +8,18 @@ import {
 import { WeeklyCalendarCardConfig } from "./types";
 
 class WeeklyCalendarCard extends LitElement implements LovelaceCard {
-  @property() public hass!: HomeAssistant;
   @state() private config!: WeeklyCalendarCardConfig;
+  @property() public hass!: HomeAssistant;
 
   public static async getConfigElement(): Promise<LovelaceCardEditor> {
-    return document.createElement("weekly-calendar-card");
+    return document.createElement("weekly-calendar-card") as LovelaceCardEditor;
   }
 
-  public static getStubConfig(hass: HomeAssistant, entities: string[]): object {
+  public static getStubConfig(
+    hass: HomeAssistant,
+    entities: string[]
+  ): Record<string, unknown> {
     const entity = entities.find((item) => item.startsWith("light")) || "";
-    const dummy = hass;
     return {
       entity: entity,
       show_name: true,
@@ -62,7 +64,7 @@ class WeeklyCalendarCard extends LitElement implements LovelaceCard {
     this.config = cardConfig;
   }
 
-  public set hass(hass: HomeAssistant) {
+  public set hassxx(hass: HomeAssistant) {
     const today = new Date();
     const startDay = new Date(
       today.setDate(
