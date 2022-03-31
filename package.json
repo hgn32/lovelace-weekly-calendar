@@ -1,9 +1,9 @@
 {
-  "name": "weekly-calendar",
+  "name": "weekly-calendar-card",
   "lockfileVersion": 2,
   "version": "0.1",
   "requires": true,
-  "module": "weekly-calendar.js",
+  "module": "weekly-calendar-card.js",
   "license": "MIT",
   "description": "",
   "packages": {},

@@ -5,9 +5,9 @@ import resolve from "@rollup/plugin-node-resolve";
 const extensions = [".ts"];
 
 export default {
-  input: "./src/weekly-calendar.ts",
+  input: "./src/weekly-calendar-card.ts",
   output: {
-    file: "./build/weekly-calendar.js",
+    file: "./build/weekly-calendar-card.js",
     format: "cjs",
   },
   plugins: [

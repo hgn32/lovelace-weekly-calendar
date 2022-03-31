@@ -1,4 +1,4 @@
-# weekly-calendar
+# weekly-calendar-card
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg?style=for-the-badge)](https://github.com/hacs/integration)
 
@@ -8,10 +8,10 @@ It doesn't work.
 ## How to use
 
 ```yaml
-- url: https://raw.githubusercontent.com/hgn32/weekly-calendar/master/weekly-calendar.js
+- url: https://raw.githubusercontent.com/hgn32/weekly-calendar-card/master/weekly-calendar-card.js
   type: js
 ```
 
 ```yaml
-- type: custom:lunar-calendar
+- type: custom:weekly-calendar-card
 ```

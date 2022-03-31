@@ -1,10 +1,6 @@
-import {
-  LovelaceCard,
-  LovelaceCardConfig,
-  LovelaceCardEditor,
-} from "custom-card-helpers";
+import { LovelaceCardConfig } from "custom-card-helpers";
 
-export interface WeeklyCalendarConfig extends LovelaceCardConfig {
+export interface WeeklyCalendarCardConfig extends LovelaceCardConfig {
   type: string;
   //  entity: string;
   showLastWeekNum: number;

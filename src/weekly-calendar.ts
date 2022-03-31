@@ -1,14 +1,66 @@
 import { customElement, LitElement, state } from "lit-element";
 import {
   HomeAssistant,
-  hasConfigOrEntityChanged,
+  LovelaceCard,
   LovelaceCardEditor,
   getLovelace,
 } from "custom-card-helpers";
-import { WeeklyCalendarConfig } from "./types";
+import { WeeklyCalendarCardConfig } from "./types";
 
-class WeeklyCalendar extends LitElement {
-  private config: WeeklyCalendarConfig;
+class WeeklyCalendarCard extends LitElement implements LovelaceCard {
+  @property() public hass!: HomeAssistant;
+  @state() private config!: WeeklyCalendarCardConfig;
+
+  public static async getConfigElement(): Promise<LovelaceCardEditor> {
+    return document.createElement("weekly-calendar-card");
+  }
+
+  public static getStubConfig(hass: HomeAssistant, entities: string[]): object {
+    const entity = entities.find((item) => item.startsWith("light")) || "";
+    const dummy = hass;
+    return {
+      entity: entity,
+      show_name: true,
+      show_state: true,
+      compact: false,
+    };
+  }
+  public getCardSize(): number {
+    return 0;
+  }
+
+  public setConfig(config: WeeklyCalendarCardConfig): void {
+    if (!config) {
+      throw new Error("common.invalid_configuration");
+    }
+    if (config.test_gui) {
+      getLovelace().setEditMode(true);
+    }
+    if (!config.entity) {
+      throw new Error("Please define an entity");
+    }
+    const cardConfig = Object.assign({}, config);
+    if (!cardConfig.entity) cardConfig.entity = [];
+    if (!cardConfig.showLastWeekNum) cardConfig.showLastWeekNum = 1;
+    if (!cardConfig.showFollowWeekNum) cardConfig.showFollowWeekNum = 2;
+    if (!cardConfig.startWeekday) cardConfig.startWeekday = 0;
+    if (!cardConfig.todayBackgroundColor)
+      cardConfig.todayBackgroundColor = "#ff0000";
+    if (!cardConfig.weekdayBackgroundColor)
+      cardConfig.weekdayBackgroundColor = [
+        {
+          //Sun
+          Weekday: 0,
+          BackgroundColor: "#ff0000",
+        },
+        {
+          //Sat
+          Weekday: 6,
+          BackgroundColor: "#ff0000",
+        },
+      ];
+    this.config = cardConfig;
+  }
 
   public set hass(hass: HomeAssistant) {
     const today = new Date();
@@ -66,51 +118,15 @@ class WeeklyCalendar extends LitElement {
     //     </style>
     //   `;
   }
-
-  public getCardSize() {
-    return 1;
-  }
-  public setConfig(config: WeeklyCalendarConfig): void {
-    if (!config) {
-      throw new Error("common.invalid_configuration");
-    }
-    if (config.test_gui) {
-      getLovelace().setEditMode(true);
-    }
-    if (!config.entity) {
-      throw new Error("Please define an entity");
-    }
-    const cardConfig = Object.assign({}, config);
-    if (!cardConfig.entity) cardConfig.entity = [];
-    if (!cardConfig.showLastWeekNum) cardConfig.showLastWeekNum = 1;
-    if (!cardConfig.showFollowWeekNum) cardConfig.showFollowWeekNum = 2;
-    if (!cardConfig.startWeekday) cardConfig.startWeekday = 0;
-    if (!cardConfig.todayBackgroundColor)
-      cardConfig.todayBackgroundColor = "#ff0000";
-    if (!cardConfig.weekdayBackgroundColor)
-      cardConfig.weekdayBackgroundColor = [
-        {
-          //Sun
-          Weekday: 0,
-          BackgroundColor: "#ff0000",
-        },
-        {
-          //Sat
-          Weekday: 6,
-          BackgroundColor: "#ff0000",
-        },
-      ];
-    this.config = cardConfig;
-  }
 }
 
-customElements.define("weekly-calendar", WeeklyCalendar);
+customElements.define("weekly-calendar-card", WeeklyCalendarCard);
 
-// // Configure the preview in the Lovelace card picker
-// window.customCards = window.customCards || [];
-// window.customCards.push({
-//   type: "weekly-calendar",
-//   name: "weekly calendar",
-//   preview: false,
-//   description: "weekly calendar.",
-// });
+// This puts your card into the UI card picker dialog
+(window as any).customCards = (window as any).customCards || [];
+(window as any).customCards.push({
+  type: "weekly-calendar-card",
+  name: "Weekly Calendar Card",
+  preview: false,
+  description: "weekly calendar card",
+});
