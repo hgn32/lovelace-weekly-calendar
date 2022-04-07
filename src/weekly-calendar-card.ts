@@ -1,19 +1,8 @@
-import {
-  LitElement,
-  property,
-  css,
-  CSSResult,
-  html,
-  TemplateResult,
-} from "lit-element";
-import {
-  HomeAssistant,
-  LovelaceCard,
-  createThing,
-  LovelaceCardConfig,
-} from "custom-card-helpers";
-import { WeeklyCalendarCardConfig } from "./types";
+import { LitElement, property, customElement, css, CSSResult, html, TemplateResult } from 'lit-element';
+import { HomeAssistant, LovelaceCard, createThing, LovelaceCardConfig } from 'custom-card-helpers';
+import { WeeklyCalendarCardConfig } from './types';
 
+@customElement('weekly-calendar-card')
 class WeeklyCalendarCard extends LitElement implements LovelaceCard {
   protected _card?: LovelaceCard;
   private _config?: WeeklyCalendarCardConfig;
@@ -42,21 +31,21 @@ class WeeklyCalendarCard extends LitElement implements LovelaceCard {
     }
     this._config = {
       // entity: [],
-      type: "",
-      showLastWeekNum: 1,
-      showFollowWeekNum: 2,
-      startWeekday: 0,
-      todayBackgroundColor: "#ff0000",
-      weekdayBackgroundColor: [
+      type: '',
+      show_last_weeks: 1,
+      show_follow_weeks: 2,
+      start_weekday: 0,
+      today_background_color: '#ff0000',
+      weekday_background_color: [
         {
           //Sun
-          Weekday: 0,
-          BackgroundColor: "#ff0000",
+          weekday: 0,
+          background_color: '#ff0000',
         },
         {
           //Sat
-          Weekday: 6,
-          BackgroundColor: "#ff0000",
+          weekday: 6,
+          background_color: '#ff0000',
         },
       ],
     };
@@ -90,15 +79,15 @@ class WeeklyCalendarCard extends LitElement implements LovelaceCard {
   }
 
   private async _createCard(config: LovelaceCardConfig): Promise<LovelaceCard> {
-    let element: LovelaceCard;
-    if (HELPERS) {
-      element = (await HELPERS).createCardElement(config);
-    } else {
-      element = createThing(config);
-    }
-    if (this._hass) {
-      element.hass = this._hass;
-    }
+    const element: LovelaceCard = createThing(config);
+    // if (HELPERS) {
+    //   element = (await HELPERS).createCardElement(config);
+    // } else {
+    //   element = createThing(config);
+    // }
+    // if (this._hass) {
+    //   element.hass = this._hass;
+    // }
     // if (element) {
     //   element.addEventListener(
     //     "ll-rebuild",
@@ -112,14 +101,11 @@ class WeeklyCalendarCard extends LitElement implements LovelaceCard {
     const today = new Date();
     const startDay = new Date(
       today.setDate(
-        today.getDate() -
-          today.getDay() +
-          (this._config!.startWeekday - 7 * this._config!.showLastWeekNum)
-      )
+        today.getDate() - today.getDay() + (this._config!.start_weekday - 7 * this._config!.show_last_weeks),
+      ),
     );
     const endDay = new Date(
-      startDay.getDate() +
-        7 * (this._config!.showLastWeekNum + this._config!.showLastWeekNum + 1)
+      startDay.getDate() + 7 * (this._config!.show_last_weeks + this._config!.show_last_weeks + 1),
     );
     return element;
 
@@ -165,16 +151,4 @@ class WeeklyCalendarCard extends LitElement implements LovelaceCard {
   }
 }
 
-customElements.define("weekly-calendar-card", WeeklyCalendarCard);
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const HELPERS = (window as any).loadCardHelpers
-  ? (window as any).loadCardHelpers()
-  : undefined;
-(window as any).customCards = (window as any).customCards || [];
-(window as any).customCards.push({
-  type: "weekly-calendar-card",
-  name: "Weekly Calendar Card",
-  preview: false,
-  description: "weekly calendar card",
-});
+customElements.define('weekly-calendar-card', WeeklyCalendarCard);
