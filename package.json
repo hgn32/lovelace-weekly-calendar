@@ -19,10 +19,10 @@
   ],
   "packages": {},
   "scripts": {
-    "start": "rollup -c rollup.config.dev.js --watch",
     "build": "rimraf dist && npm run lint && npm run rollup",
     "lint": "eslint src/*.ts",
-    "rollup": "rollup -c"
+    "rollup": "rollup -c",
+    "start": "rollup -c rollup.config.dev.js --watch"
   },
   "dependencies": {
     "custom-card-helpers": "^1.6.6",
