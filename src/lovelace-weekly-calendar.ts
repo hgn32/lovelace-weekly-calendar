@@ -13,7 +13,7 @@ import { HomeAssistant } from 'custom-card-helpers';
 
 import { WeeklyCalendarCardConfig } from './types';
 
-@customElement('weekly-calendar-card')
+@customElement('lovelace-weekly-calendar')
 class WeeklyCalendarCard extends LitElement {
   @property() public hass?: HomeAssistant;
   @property() private _config?: WeeklyCalendarCardConfig;
@@ -167,4 +167,4 @@ class WeeklyCalendarCard extends LitElement {
   }
 }
 
-customElements.define('weekly-calendar-card', WeeklyCalendarCard);
+customElements.define('lovelace-weekly-calendar', WeeklyCalendarCard);

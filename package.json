@@ -1,11 +1,11 @@
 {
-  "name": "weekly-calendar-card",
+  "name": "lovelace-weekly-calendar",
   "lockfileVersion": 2,
-  "version": "0.1",
+  "version": "0.1.0",
   "requires": true,
-  "module": "weekly-calendar-card.js",
+  "module": "lovelace-weekly-calendar.js",
   "description": "",
-  "repository": "git@github.com:hgn32/weekly-calendar-card.git",
+  "repository": "git@github.com:hgn32/lovelace-weekly-calendar.git",
   "author": "hgn32",
   "license": "MIT",
   "keywords": [

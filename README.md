@@ -1,4 +1,4 @@
-# weekly-calendar-card
+# lovelace-weekly-calendar
 
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg?style=for-the-badge)](https://github.com/hacs/integration)
 
@@ -8,5 +8,5 @@ It doesn't work.
 ## How to use
 
 ```yaml
-- type: custom:weekly-calendar-card
+- type: custom:lovelace-weekly-calendar
 ```
