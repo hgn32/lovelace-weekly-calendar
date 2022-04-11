@@ -43,6 +43,7 @@ class WeeklyCalendarCard extends LitElement {
           },
         ]
       : config.weekday_background_color;
+    console.log(config);
     this._config = config;
   }
 
