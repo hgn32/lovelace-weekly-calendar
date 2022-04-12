@@ -22,7 +22,7 @@ class LovelaceWeeklyCalendar extends LitElement {
         if (!config.entity) {
             throw new Error(`There is no cards parameter defined`);
         }
-        config.show_last_weeks = !config.show_last_weeks ? 1 : config.show_last_weeks;
+        // config.show_last_weeks = !config.show_last_weeks ? 1 : config.show_last_weeks;
         config.show_follow_weeks = !config.show_follow_weeks ? 2 : config.show_follow_weeks;
         config.start_weekday = !config.start_weekday ? 0 : config.start_weekday;
         config.today_background_color = !config.today_background_color ? '#ff0000' : config.today_background_color;
@@ -75,9 +75,7 @@ class LovelaceWeeklyCalendar extends LitElement {
         if (!stateObj) {
             return html`
                 <ha-card>
-                    <div class="warning">
-                        Entity not available: ${this._config.entity}
-                    </div>
+                    <div class="warning">Entity not available: ${this._config.entity}</div>
                 </ha-card>
             `;
         }
@@ -155,7 +153,7 @@ class LovelaceWeeklyCalendar extends LitElement {
             }
         `;
         const weekdays = this._config.weekday_background_color.map(
-            week =>
+            (week) =>
                 css`
                     .weekday {
                         background-color: ${unsafeCSS(week.background_color)};
