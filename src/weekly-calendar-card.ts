@@ -141,7 +141,7 @@ class WeeklyCalendarCard extends LitElement {
     // );
   }
 
-  static get styles(): CSSResult | CSSResult[] {
+  static get styles() {
     return css`
       ha-card {
         padding: 16px;
