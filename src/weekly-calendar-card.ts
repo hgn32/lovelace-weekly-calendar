@@ -15,7 +15,7 @@ import { WeeklyCalendarCardConfig } from './types';
 
 @customElement('weekly-calendar-card')
 class WeeklyCalendarCard extends LitElement {
-  @property() public hass?: HomeAssistant;
+  @property() public _hass?: HomeAssistant;
   @property() private _config?: WeeklyCalendarCardConfig;
 
   public setConfig(config_org: Readonly<WeeklyCalendarCardConfig>): void {
@@ -59,11 +59,11 @@ class WeeklyCalendarCard extends LitElement {
       return true;
     }
 
-    if (this.hass && this._config) {
+    if (this._hass && this._config) {
       const oldHass = changedProps.get('hass') as HomeAssistant | undefined;
 
       if (oldHass) {
-        return oldHass.states[this._config.entity] !== this.hass.states[this._config.entity];
+        return oldHass.states[this._config.entity] !== this._hass.states[this._config.entity];
       }
     }
 
@@ -71,10 +71,10 @@ class WeeklyCalendarCard extends LitElement {
   }
 
   protected render(): TemplateResult | void {
-    if (!this._config || !this.hass) {
+    if (!this._config || !this._hass) {
       return html``;
     }
-    const stateObj = this.hass.states[this._config.entity];
+    const stateObj = this._hass.states[this._config.entity];
     if (!stateObj) {
       return html`
         <ha-card>
@@ -123,10 +123,26 @@ class WeeklyCalendarCard extends LitElement {
         </table>
       </ha-card>
     `;
+
+    // const today = css`
+    //   .today {
+    //     background-color: ${unsafeCSS(this._config.today_background_color)};
+    //     color: ${unsafeCSS(this._config.today_text_color)};
+    //   }
+    // `;
+    // const weekdays = this._config.weekday_background_color.map(
+    //   (week) =>
+    //     css`
+    //       .weekday {
+    //         background-color: ${unsafeCSS(week.background_color)};
+    //         color: ${unsafeCSS(week.text_color)};
+    //       }
+    //     `,
+    // );
   }
 
-  protected get styles(): CSSResult | CSSResult[] {
-    const base = css`
+  static get styles(): CSSResult | CSSResult[] {
+    return css`
       ha-card {
         padding: 16px;
       }
@@ -144,30 +160,10 @@ class WeeklyCalendarCard extends LitElement {
         text-align: center;
         vertical-align: middle;
         padding: 8px;
+        font-size: 150%;
       }
     `;
-    if (!this._config || !this.hass) {
-      return base;
-    }
-
-    const today = css`
-      .today {
-        background-color: ${unsafeCSS(this._config.today_background_color)};
-        color: ${unsafeCSS(this._config.today_text_color)};
-      }
-    `;
-    const weekdays = this._config.weekday_background_color.map(
-      (week) =>
-        css`
-          .weekday {
-            background-color: ${unsafeCSS(week.background_color)};
-            color: ${unsafeCSS(week.text_color)};
-          }
-        `,
-    );
-
-    return [base, today].concat(weekdays);
   }
 }
 
-customElements.define('WeeklyCalendarCard-weekly-calendar', WeeklyCalendarCard);
+customElements.define('weekly-calendar-card', WeeklyCalendarCard);
