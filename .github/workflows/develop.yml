@@ -22,6 +22,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+      # set version
+      - id: package-version
+        run: npx -c 'echo "::set-output name=version::$npm_package_version"'
 
       # build
       - run: npm ci
@@ -34,5 +37,5 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: dist/weekly-calendar-card.js
           asset_name: weekly-calendar-card.js
-          tag: ${{ npx -c 'echo "$npm_package_version"' }}
+          tag: ${{ steps.package-version.outputs.version }}
           overwrite: true
