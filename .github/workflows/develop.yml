@@ -25,12 +25,23 @@ jobs:
               with:
                   node-version: ${{ matrix.node-version }}
                   cache: 'npm'
+
+            # set param
+            - name: set package version
+                id: package-version
+                run: node -p -e '`::set-output name=version::${require("./package.json").version}`'
+
             # build
             - run: npm ci
             - run: npm run build
+
             # release
             - uses: softprops/action-gh-release@v1
               with:
-                  draft: true
-                  generate_release_notes: true
+                  name: Release ${{ steps.package-version.outputs.version }}
                   files: dist/*.js
+                  draft: false
+                  prerelease: false
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  
