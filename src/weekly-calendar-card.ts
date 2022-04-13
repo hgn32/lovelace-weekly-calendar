@@ -116,29 +116,34 @@ class WeeklyCalendarCard extends LitElement {
         ${isEndOfWeek ? html`</tr>` : html``}
       `);
     }
+
+    const style_today = css`
+      .today {
+        background-color: ${unsafeCSS(this._config.today_background_color)};
+        color: ${unsafeCSS(this._config.today_text_color)};
+      }
+    `;
+    const style_weekdays = this._config.weekday_background_color.map(
+      (week) =>
+        css`
+          .weekday {
+            background-color: ${unsafeCSS(week.background_color)};
+            color: ${unsafeCSS(week.text_color)};
+          }
+        `,
+    );
+
     return html`
+      <style>
+        ${style_today}
+        ${style_weekdays}
+      </style>
       <ha-card>
         <table calss="calendar">
           ${days}
         </table>
       </ha-card>
     `;
-
-    // const today = css`
-    //   .today {
-    //     background-color: ${unsafeCSS(this._config.today_background_color)};
-    //     color: ${unsafeCSS(this._config.today_text_color)};
-    //   }
-    // `;
-    // const weekdays = this._config.weekday_background_color.map(
-    //   (week) =>
-    //     css`
-    //       .weekday {
-    //         background-color: ${unsafeCSS(week.background_color)};
-    //         color: ${unsafeCSS(week.text_color)};
-    //       }
-    //     `,
-    // );
   }
 
   static get styles() {
@@ -165,5 +170,4 @@ class WeeklyCalendarCard extends LitElement {
     `;
   }
 }
-
-customElements.define('weekly-calendar-card', WeeklyCalendarCard);
+if (!customElements.get('weekly-calendar-card')) customElements.define('weekly-calendar-card', WeeklyCalendarCard);
