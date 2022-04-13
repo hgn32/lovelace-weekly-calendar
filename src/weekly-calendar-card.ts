@@ -47,8 +47,6 @@ class WeeklyCalendarCard extends LitElement {
             },
           ],
     };
-
-    console.log(config);
     this._config = config;
   }
 
@@ -109,12 +107,13 @@ class WeeklyCalendarCard extends LitElement {
       const tomorrow = new Date(currentDay.getDate() + 1);
       const isStartOfWeek = currentDay.getDay() === this._config.start_weekday ? true : false;
       const isEndOfWeek = tomorrow.getDay() === this._config.start_weekday ? true : false;
+      // prettier-ignore
       days.push(html`
-        ${isStartOfWeek ? html`<tr class="week"></tr>` : html``}
+        ${isStartOfWeek ? html`<tr class="week">` : html``}
         <td class="day weekday${currentDay.getDay()}" ${isToday ? 'today' : ''}>
           <div>${currentDay.getDate()}</div>
         </td>
-        ${isEndOfWeek ? '</tr>' : ''}
+        ${isEndOfWeek ? html`</tr>` : html``}
       `);
     }
     return html`
