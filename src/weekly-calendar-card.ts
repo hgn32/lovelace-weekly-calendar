@@ -18,31 +18,36 @@ class WeeklyCalendarCard extends LitElement {
     @property() public hass?: HomeAssistant;
     @property() private _config?: WeeklyCalendarCardConfig;
 
-    public setConfig(config: WeeklyCalendarCardConfig): void {
-        if (!config.entity) {
+    public setConfig(config_org: Readonly<WeeklyCalendarCardConfig>): void {
+        if (!config_org.entity) {
             throw new Error(`There is no cards parameter defined`);
         }
-        // config.show_last_weeks = !config.show_last_weeks ? 1 : config.show_last_weeks;
-        config.show_follow_weeks = !config.show_follow_weeks ? 2 : config.show_follow_weeks;
-        config.start_weekday = !config.start_weekday ? 0 : config.start_weekday;
-        config.today_background_color = !config.today_background_color ? '#ff0000' : config.today_background_color;
-        config.today_text_color = !config.today_text_color ? '#000000' : config.today_text_color;
-        config.weekday_background_color = !config.weekday_background_color
-            ? [
-                  {
-                      //Sun
-                      weekday: 0,
-                      background_color: '#ff0000',
-                      text_color: '#000000',
-                  },
-                  {
-                      //Sat
-                      weekday: 6,
-                      background_color: '#0000ff',
-                      text_color: '#000000',
-                  },
-              ]
-            : config.weekday_background_color;
+        const config: WeeklyCalendarCardConfig = {
+            type: config_org.type,
+            entity: config_org.entity,
+            show_last_weeks: config_org.show_last_weeks ? config_org.show_last_weeks : 1,
+            show_follow_weeks: config_org.show_follow_weeks ? config_org.show_follow_weeks : 2,
+            start_weekday: config_org.start_weekday ? config_org.start_weekday : 0,
+            today_background_color: config_org.today_background_color ? config_org.today_background_color : '#ff0000',
+            today_text_color: config_org.today_text_color ? config_org.today_text_color : '#000000',
+            weekday_background_color: config_org.weekday_background_color
+                ? config_org.weekday_background_color
+                : [
+                      {
+                          //Sun
+                          weekday: 0,
+                          background_color: '#ff0000',
+                          text_color: '#000000',
+                      },
+                      {
+                          //Sat
+                          weekday: 6,
+                          background_color: '#0000ff',
+                          text_color: '#000000',
+                      },
+                  ],
+        };
+
         console.log(config);
         this._config = config;
     }
