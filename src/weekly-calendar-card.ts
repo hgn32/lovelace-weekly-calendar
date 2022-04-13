@@ -110,7 +110,7 @@ class WeeklyCalendarCard extends LitElement {
             const isStartOfWeek = currentDay.getDay() === this._config.start_weekday ? true : false;
             const isEndOfWeek = tomorrow.getDay() === this._config.start_weekday ? true : false;
             days.push(html`
-                ${isStartOfWeek ? '<tr class"week">' : ''}
+                ${isStartOfWeek ? '<tr class="week">' : ''}
                 <td class="day weekday${currentDay.getDay()}" ${isToday ? 'today' : ''}>
                     <div>${currentDay.getDate()}</div>
                 </td>
@@ -118,11 +118,11 @@ class WeeklyCalendarCard extends LitElement {
             `);
         }
         return html`
-            <ha-card
-                ><table calss="calendar">
+            <ha-card>
+                <table calss="calendar">
                     ${days}
-                </table></ha-card
-            >
+                </table>
+            </ha-card>
         `;
     }
 
