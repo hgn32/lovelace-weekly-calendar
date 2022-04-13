@@ -4,17 +4,17 @@ import babel from 'rollup-plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 
 export default {
-  input: ['src/lovelace-weekly-calendar.ts'],
-  output: {
-    dir: './dist',
-    format: 'es',
-  },
-  plugins: [
-    resolve(),
-    typescript(),
-    babel({
-      exclude: 'node_modules/**',
-    }),
-    terser(),
-  ],
+    input: ['src/weekly-calendar-card.ts'],
+    output: {
+        dir: './dist',
+        format: 'es',
+    },
+    plugins: [
+        resolve(),
+        typescript(),
+        babel({
+            exclude: 'node_modules/**',
+        }),
+        terser(),
+    ],
 };

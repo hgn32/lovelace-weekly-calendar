@@ -1,46 +1,44 @@
 {
-  "name": "lovelace-weekly-calendar",
-  "lockfileVersion": 2,
-  "version": "0.1.0",
-  "requires": true,
-  "module": "lovelace-weekly-calendar.js",
-  "description": "",
-  "repository": "git@github.com:hgn32/lovelace-weekly-calendar.git",
-  "author": "hgn32",
-  "license": "MIT",
-  "keywords": [
-    "home-assistant",
-    "homeassistant",
-    "hass",
-    "automation",
-    "lovelace",
-    "custom-cards",
-    "weekly-calendar"
-  ],
-  "packages": {},
-  "scripts": {
-    "build": "rimraf dist && npm run lint && npm run rollup",
-    "lint": "eslint src/*.ts",
-    "rollup": "rollup -c",
-    "start": "rollup -c rollup.config.dev.js --watch"
-  },
-  "dependencies": {
-    "custom-card-helpers": "^1.9.0",
-    "home-assistant-js-websocket": "^7.0.2",
-    "lit-element": "^3.2.0",
-    "lit-html": "^2.2.2"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.17.9",
-    "@typescript-eslint/eslint-plugin": "^5.18.0",
-    "@typescript-eslint/parser": "^5.18.0",
-    "eslint": "^8.13.0",
-    "rollup": "^2.70.1",
-    "rollup-plugin-babel": "^4.3.3",
-    "rollup-plugin-node-resolve": "^5.2.0",
-    "rollup-plugin-serve": "^1.1.0",
-    "rollup-plugin-terser": "^7.0.2",
-    "rollup-plugin-typescript2": "^0.31.2",
-    "typescript": "^4.6.3"
-  }
+    "name": "weekly-calendar-card",
+    "lockfileVersion": 2,
+    "version": "0.1.0",
+    "requires": true,
+    "module": "weekly-calendar-card.js",
+    "description": "",
+    "repository": "git@github.com:hgn32/weekly-calendar-card.git",
+    "author": "hgn32",
+    "license": "MIT",
+    "keywords": [
+        "home-assistant",
+        "homeassistant",
+        "hass",
+        "custom-cards",
+        "weekly-calendar"
+    ],
+    "packages": {},
+    "scripts": {
+        "build": "rimraf dist && npm run lint && npm run rollup",
+        "lint": "eslint src/*.ts",
+        "rollup": "rollup -c",
+        "start": "rollup -c rollup.config.dev.js --watch"
+    },
+    "dependencies": {
+        "custom-card-helpers": "^1.9.0",
+        "home-assistant-js-websocket": "^7.0.2",
+        "lit-element": "^3.2.0",
+        "lit-html": "^2.2.2"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.17.9",
+        "@typescript-eslint/eslint-plugin": "^5.18.0",
+        "@typescript-eslint/parser": "^5.18.0",
+        "eslint": "^8.13.0",
+        "rollup": "^2.70.1",
+        "rollup-plugin-babel": "^4.3.3",
+        "rollup-plugin-node-resolve": "^5.2.0",
+        "rollup-plugin-serve": "^1.1.0",
+        "rollup-plugin-terser": "^7.0.2",
+        "rollup-plugin-typescript2": "^0.31.2",
+        "typescript": "^4.6.3"
+    }
 }

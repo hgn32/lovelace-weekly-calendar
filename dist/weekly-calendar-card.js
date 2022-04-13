@@ -101,4 +101,4 @@ console.warn("The main 'lit-element' module entrypoint is deprecated. Please upd
                         background-color: ${n(t.background_color)};
                         color: ${n(t.text_color)};
                     }
-                `));return[t,e].concat(i)}};t([et()],st.prototype,"hass",void 0),t([et()],st.prototype,"_config",void 0),st=t([(t=>e=>"function"==typeof e?((t,e)=>(window.customElements.define(t,e),e))(t,e):((t,e)=>{const{kind:i,elements:s}=e;return{kind:i,elements:s,finisher(e){window.customElements.define(t,e)}}})(t,e))("lovelace-weekly-calendar")],st),customElements.define("lovelace-weekly-calendar",st);
+                `));return[t,e].concat(i)}};t([et()],st.prototype,"hass",void 0),t([et()],st.prototype,"_config",void 0),st=t([(t=>e=>"function"==typeof e?((t,e)=>(window.customElements.define(t,e),e))(t,e):((t,e)=>{const{kind:i,elements:s}=e;return{kind:i,elements:s,finisher(e){window.customElements.define(t,e)}}})(t,e))("weekly-calendar-card")],st),customElements.define("WeeklyCalendarCard-weekly-calendar",st);

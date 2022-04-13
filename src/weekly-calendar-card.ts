@@ -11,14 +11,14 @@ import {
 } from 'lit-element';
 import { HomeAssistant } from 'custom-card-helpers';
 
-import { LovelaceWeeklyCalendarConfig } from './types';
+import { WeeklyCalendarCardConfig } from './types';
 
-@customElement('lovelace-weekly-calendar')
-class LovelaceWeeklyCalendar extends LitElement {
+@customElement('weekly-calendar-card')
+class WeeklyCalendarCard extends LitElement {
     @property() public hass?: HomeAssistant;
-    @property() private _config?: LovelaceWeeklyCalendarConfig;
+    @property() private _config?: WeeklyCalendarCardConfig;
 
-    public setConfig(config: LovelaceWeeklyCalendarConfig): void {
+    public setConfig(config: WeeklyCalendarCardConfig): void {
         if (!config.entity) {
             throw new Error(`There is no cards parameter defined`);
         }
@@ -166,4 +166,4 @@ class LovelaceWeeklyCalendar extends LitElement {
     }
 }
 
-customElements.define('lovelace-weekly-calendar', LovelaceWeeklyCalendar);
+customElements.define('WeeklyCalendarCard-weekly-calendar', WeeklyCalendarCard);

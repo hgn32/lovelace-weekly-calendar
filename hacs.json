@@ -1,5 +1,6 @@
 {
-  "name": "Lovelace Weekly Calendar",
-  "filename": "lovelace-weekly-calendar.js",
-  "render_readme": true
+    "name": "Weekly Calendar Card",
+    "filename": "weekly-calendar-card.js",
+    "render_readme": true,
+    "country": ["JP"]
 }
