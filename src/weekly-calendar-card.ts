@@ -209,7 +209,7 @@ class WeeklyCalendarCard extends LitElement {
         border: 1px solid var(--primary-text-color);
       }
       .day {
-      	width: calc((100% / 7) - 21px);
+      	width: calc((100% / 7) - 23px);
         text-align: center;
         vertical-align: middle;
         padding: 10px;
