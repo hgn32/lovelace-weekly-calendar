@@ -9,6 +9,8 @@ doesn't work.
 HACS custom repository
 
 ## sample
+![white](https://user-images.githubusercontent.com/2378302/163414823-1a7547b1-43de-48aa-8ca9-ae4de9f8330f.png)
+![back](https://user-images.githubusercontent.com/2378302/163414835-08d91856-23dc-4f30-bd14-be58021c2350.png)
 
 ```yaml
 - type: custom:weekly-calendar-card
