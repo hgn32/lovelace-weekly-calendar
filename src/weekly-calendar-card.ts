@@ -1,11 +1,9 @@
 import {
   LitElement,
   html,
-  customElement,
   property,
   TemplateResult,
   css,
-  CSSResult,
   PropertyValues,
   unsafeCSS,
 } from 'lit-element';
@@ -107,15 +105,15 @@ class WeeklyCalendarCard extends LitElement {
   
     const days: TemplateResult[] = [];
     for (let currentDay = startDay; currentDay <= endDay; currentDay.setDate(currentDay.getDate() + 1)) {
-      const classes = ["day"];
-      classes.push("weekday" + String(currentDay.getDay));
-      if(currentDay.getDate() + 7 - currentDay.getDay() > lastDayMonth.getDate()) classes.push("firstday_of_month");
-      if(currentDay.getDate() - currentDay.getDay() > 0)  classes.push("firstweek_of_month");
-      if(currentDay.getTime() == today.getTime()) classes.push("today");
-      if(currentDay.getDate() === 1) classes.push("firstday_of_month");
+      let class_list = ["day"];
+      class_list.push("weekday" + String(currentDay.getDay));
+      if(currentDay.getDate() + 7 - currentDay.getDay() > lastDayMonth.getDate()) class_list.push("lastweek_of_month");
+      if(currentDay.getDate() - currentDay.getDay() > 0)  class_list.push("firstweek_of_month");
+      if(currentDay.getTime() === today.getTime()) class_list.push("today");
+      if(currentDay.getDate() === 1) class_list.push("firstday_of_month");
       // prettier-ignore
       days.push(html`
-        <div class="${classes}">
+        <div class="${class_list}">
           <div>${currentDay.getDate()}</div>
         </div>
       `);
