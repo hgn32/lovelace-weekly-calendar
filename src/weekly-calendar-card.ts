@@ -107,14 +107,15 @@ class WeeklyCalendarCard extends LitElement {
   
     const days: TemplateResult[] = [];
     for (let currentDay = startDay; currentDay <= endDay; currentDay.setDate(currentDay.getDate() + 1)) {
-      const tomorrow = new Date(currentDay.getFullYear(), currentDay.getMonth(), currentDay.getDate() + 1);
-      const isLastWeek = currentDay.getDate() + 7 - currentDay.getDay() > lastDayMonth.getDate();
-      const isFirstWeek = currentDay.getDate() - currentDay.getDay() > 0;
-      const isToday = currentDay.getTime() == today.getTime() ? true : false;
-      const isFirstDay = currentDay.getDate() === 1 ? true : false;
+      let classes = ["day"];
+      classes.push("weekday"+currentDay.getDay);
+      if(currentDay.getDate() + 7 - currentDay.getDay() > lastDayMonth.getDate()) classes.push("firstday_of_month");
+      if(currentDay.getDate() - currentDay.getDay() > 0)  classes.push("firstweek_of_month");
+      if(currentDay.getTime() == today.getTime()) classes.push("today");
+      if(currentDay.getDate() === 1) classes.push("firstday_of_month");
       // prettier-ignore
       days.push(html`
-        <div class="day weekday${currentDay.getDay()}" ${isToday ? html`today` : html`` } ${isFirstDay ? html`firstday_of_month` : html``} ${isLastWeek ? html`lastweek_of_month` : html``} ${isFirstWeek ? html`firstweek_of_month` : html``}">
+        <div class="${classes}">
           <div>${currentDay.getDate()}</div>
         </div>
       `);
