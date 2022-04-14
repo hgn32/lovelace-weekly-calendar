@@ -105,7 +105,7 @@ class WeeklyCalendarCard extends LitElement {
   
     const days: TemplateResult[] = [];
     for (let currentDay = startDay; currentDay <= endDay; currentDay.setDate(currentDay.getDate() + 1)) {
-      let class_list = ["day"];
+      const class_list = ["day"];
       class_list.push("weekday" + String(currentDay.getDay));
       if(currentDay.getDate() + 7 - currentDay.getDay() > lastDayMonth.getDate()) class_list.push("lastweek_of_month");
       if(currentDay.getDate() - currentDay.getDay() > 0)  class_list.push("firstweek_of_month");
@@ -164,17 +164,17 @@ class WeeklyCalendarCard extends LitElement {
         flex-wrap: wrap;
       }
       .lastweek_of_month{
-        border-bottom: 2px solid #111111;
+        border-bottom: 2px solid var(--primary-text-color);
       }
       .firstweek_of_month{
-        border-top: 2px solid #111111;
+        border-top: 2px solid var(--primary-text-color);
       }
       .firstday_of_month{
-        border-left: 2px solid #111111;
+        border-left: 2px solid var(--primary-text-color);
       }
       .day {
       	width: 14.3%;
-        border: 1px solid #111111;
+        border: 1px solid var(--primary-text-color);
         text-align: center;
         vertical-align: middle;
         padding: 8px;
