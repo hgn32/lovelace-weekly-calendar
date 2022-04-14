@@ -179,14 +179,13 @@ class WeeklyCalendarCard extends LitElement {
         width: 100%;
       }
       .header{
-        text-align:center;
-        font-size: 150%;
         border: 1px solid var(--primary-text-color);
       	width: calc((100% / 7) - 19px);
         text-align: center;
         vertical-align: middle;
         padding: 8px;
         margin: 0;
+        font-size: 150%;
       }
       .lastweek_of_month{
         border-top: 1px solid var(--primary-text-color);
