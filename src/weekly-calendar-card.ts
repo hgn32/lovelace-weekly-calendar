@@ -106,14 +106,15 @@ class WeeklyCalendarCard extends LitElement {
 
     const days: TemplateResult[] = [];
     for (let currentDay = startDay; currentDay <= endDay; currentDay.setDate(currentDay.getDate() + 1)) {
-      const isToday = currentDay.getTime() == today.getTime() ? true : false;
       const tomorrow = new Date(currentDay.getDate() + 1);
+      const isToday = currentDay.getTime() == today.getTime() ? true : false;
+      const isFirstDay = currentDay.getDate() === 1 ? true : false;
       const isStartOfWeek = currentDay.getDay() === this._config.start_weekday ? true : false;
       const isEndOfWeek = tomorrow.getDay() === this._config.start_weekday ? true : false;
       // prettier-ignore
       days.push(html`
         ${isStartOfWeek ? html`<tr class="week">` : html``}
-        <td class="day weekday${currentDay.getDay()}" ${isToday ? 'today' : ''}">
+        <td class="day weekday${currentDay.getDay()}" ${isToday ? 'today' : ''} ${isFirstDay ? 'firstday_of_month' : ''}">
           <div>${currentDay.getDate()}</div>
         </td>
         ${isEndOfWeek ? html`</tr>` : html``}
