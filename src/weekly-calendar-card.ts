@@ -107,7 +107,7 @@ class WeeklyCalendarCard extends LitElement {
   
     const days: TemplateResult[] = [];
     for (let currentDay = startDay; currentDay <= endDay; currentDay.setDate(currentDay.getDate() + 1)) {
-      const tomorrow = new Date(currentDay.getDate() + 1);
+      const tomorrow = new Date(currentDay.getFullYear(), currentDay.getMonth(), currentDay.getDate() + 1);
       const isLastWeek = currentDay.getDate() + 7 - currentDay.getDay() > lastDayMonth.getDate();
       const isFirstWeek = currentDay.getDate() - currentDay.getDay() > 0;
       const isToday = currentDay.getTime() == today.getTime() ? true : false;
