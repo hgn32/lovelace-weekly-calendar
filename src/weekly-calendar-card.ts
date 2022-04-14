@@ -103,10 +103,13 @@ class WeeklyCalendarCard extends LitElement {
         (this._config.show_last_weeks + this._config.show_follow_weeks + 1) * 7 * 24 * 60 * 60 * 1000 -
         24 * 60 * 60 * 1000,
     );
-
+    const lastDayMonth = new Date(now.getFullYear(), now.getMonth()+1, 0);
+  
     const days: TemplateResult[] = [];
     for (let currentDay = startDay; currentDay <= endDay; currentDay.setDate(currentDay.getDate() + 1)) {
       const tomorrow = new Date(currentDay.getDate() + 1);
+      const isLastWeek = currentDay.getDate() + 7 - currentDay.getDay() > lastDayMonth.getDate();
+      const isFirstWeek = currentDay.getDate() - currentDay.getDay() > 0;
       const isToday = currentDay.getTime() == today.getTime() ? true : false;
       const isFirstDay = currentDay.getDate() === 1 ? true : false;
       const isStartOfWeek = currentDay.getDay() === this._config.start_weekday ? true : false;
@@ -114,7 +117,7 @@ class WeeklyCalendarCard extends LitElement {
       // prettier-ignore
       days.push(html`
         ${isStartOfWeek ? html`<tr class="week">` : html``}
-        <td class="day weekday${currentDay.getDay()}" ${isToday ? 'today' : ''} ${isFirstDay ? 'firstday_of_month' : ''}">
+        <td class="day weekday${currentDay.getDay()}" ${isToday ? 'today' : ''} ${isFirstDay ? 'firstday_of_month' : ''} ${isLastWeek ? 'lastweek_of_month' : ''} ${isFirstWeek ? 'firstweek_of_month' : ''}">
           <div>${currentDay.getDate()}</div>
         </td>
         ${isEndOfWeek ? html`</tr>` : html``}
@@ -130,7 +133,7 @@ class WeeklyCalendarCard extends LitElement {
     const style_weekdays = this._config.weekday_background_color.map(
       (week) =>
         css`
-          .weekday {
+          .weekday${week.weekday} {
             background-color: ${unsafeCSS(week.background_color)};
             color: ${unsafeCSS(week.text_color)};
           }
