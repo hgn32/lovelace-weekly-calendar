@@ -164,13 +164,13 @@ class WeeklyCalendarCard extends LitElement {
         flex-wrap: wrap;
       }
       .lastweek_of_month{
-        border-bottom: 2px solid var(--primary-text-color);
+        border-bottom-width: 2px;
       }
       .firstweek_of_month{
-        border-top: 2px solid var(--primary-text-color);
+        border-top-width: 2px;
       }
       .firstday_of_month{
-        border-left: 2px solid var(--primary-text-color);
+        border-left-width: 2px;
       }
       .day {
       	width: 14.3%;
