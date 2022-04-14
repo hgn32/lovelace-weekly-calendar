@@ -86,7 +86,7 @@ class WeeklyCalendarCard extends LitElement {
       `;
     }
     const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth()+1, now.getDate());
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const startDay = new Date(
       today.getTime() -
         (today.getDay() -
