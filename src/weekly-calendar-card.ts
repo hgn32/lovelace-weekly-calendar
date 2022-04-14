@@ -112,15 +112,11 @@ class WeeklyCalendarCard extends LitElement {
       const isFirstWeek = currentDay.getDate() - currentDay.getDay() > 0;
       const isToday = currentDay.getTime() == today.getTime() ? true : false;
       const isFirstDay = currentDay.getDate() === 1 ? true : false;
-      const isStartOfWeek = currentDay.getDay() === this._config.start_weekday ? true : false;
-      const isEndOfWeek = tomorrow.getDay() === this._config.start_weekday ? true : false;
       // prettier-ignore
       days.push(html`
-        ${isStartOfWeek ? html`<tr class="week">` : html``}
-        <td class="day weekday${currentDay.getDay()}" ${isToday ? html`today` : html`` } ${isFirstDay ? html`firstday_of_month` : html``} ${isLastWeek ? html`lastweek_of_month` : html``} ${isFirstWeek ? html`firstweek_of_month` : html``}">
+        <div class="day weekday${currentDay.getDay()}" ${isToday ? html`today` : html`` } ${isFirstDay ? html`firstday_of_month` : html``} ${isLastWeek ? html`lastweek_of_month` : html``} ${isFirstWeek ? html`firstweek_of_month` : html``}">
           <div>${currentDay.getDate()}</div>
-        </td>
-        ${isEndOfWeek ? html`</tr>` : html``}
+        </div>
       `);
     }
 
@@ -146,9 +142,9 @@ class WeeklyCalendarCard extends LitElement {
           ${style_today}
           ${style_weekdays}
         </style>
-        <table calss="calendar">
+        <div calss="calendar">
           ${days}
-        </table>
+        </div>
       </ha-card>
     `;
   }
@@ -165,8 +161,8 @@ class WeeklyCalendarCard extends LitElement {
         padding: 8px;
       }
       .calendar {
-        width: 100%;
-        border-collapse: collapse;
+        display: flex;
+        flex-wrap: wrap;
       }
       .lastweek_of_month{
         border-bottom: 2px solid #111111;
@@ -178,6 +174,7 @@ class WeeklyCalendarCard extends LitElement {
         border-left: 2px solid #111111;
       }
       .day {
+      	width: 14.3%;
         border: 1px solid #111111;
         text-align: center;
         vertical-align: middle;
