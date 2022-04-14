@@ -108,9 +108,11 @@ class WeeklyCalendarCard extends LitElement {
       const class_list = ["day"];
       class_list.push("weekday" + String(currentDay.getDay()));
       if(currentDay.getDate() + 7 - currentDay.getDay() > lastDayMonth.getDate()) class_list.push("lastweek_of_month");
-      if(currentDay.getDate() - currentDay.getDay() > 0)  class_list.push("firstweek_of_month");
+      if(currentDay.getDate() - currentDay.getDay() < 0)  class_list.push("firstweek_of_month");
       if(currentDay.getTime() === today.getTime()) class_list.push("today");
       if(currentDay.getDate() === 1) class_list.push("firstday_of_month");
+      if(!class_list.includes("firstday_of_month") && !class_list.includes("firstweek_of_month") && !class_list.includes("lastweek_of_month"))
+          class_list.push("day_normal");
       // prettier-ignore
       days.push(html`
         <div class="${class_list.join(" ")}">
@@ -172,12 +174,15 @@ class WeeklyCalendarCard extends LitElement {
       .firstday_of_month{
         border-left-width: 2px;
       }
-      .day {
-      	width: 14.3%;
+      .day_normal{
         border: 1px solid var(--primary-text-color);
+      }
+      .day {
+      	width: calc((100% / 7) - 19px);
         text-align: center;
         vertical-align: middle;
         padding: 8px;
+        margin: 0;
         font-size: 150%;
       }
     `;
