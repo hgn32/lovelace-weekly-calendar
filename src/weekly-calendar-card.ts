@@ -102,8 +102,11 @@ class WeeklyCalendarCard extends LitElement {
         24 * 60 * 60 * 1000,
     );
     const lastDayMonth = new Date(now.getFullYear(), now.getMonth()+1, 0);
-  
+    const weekday_view[] = ['日','月','火','水','木','金','土'];
+
+    const headers: TemplateResult[] = [];
     const days: TemplateResult[] = [];
+    let count: = 0;
     for (let currentDay = startDay; currentDay <= endDay; currentDay.setDate(currentDay.getDate() + 1)) {
       const class_list = ["day"];
       class_list.push("weekday" + String(currentDay.getDay()));
@@ -113,6 +116,14 @@ class WeeklyCalendarCard extends LitElement {
       if(currentDay.getDate() === 1) class_list.push("firstday_of_month");
       if(!class_list.includes("firstday_of_month") && !class_list.includes("firstweek_of_month") && !class_list.includes("lastweek_of_month"))
           class_list.push("day_normal");
+      if(count++ < 7){
+        // prettier-ignore
+        headers.push(html`
+          <div class="header">
+            <div>${weekday_view[currentDay.getDay()]}</div>
+          </div>
+        `);
+      }
       // prettier-ignore
       days.push(html`
         <div class="${class_list.join(" ")}">
@@ -144,6 +155,7 @@ class WeeklyCalendarCard extends LitElement {
           ${style_weekdays}
         </style>
         <div class="calendar">
+          ${headers}
           ${days}
         </div>
       </ha-card>
@@ -165,6 +177,10 @@ class WeeklyCalendarCard extends LitElement {
         display: flex;
         flex-wrap: wrap;
         width: 100%;
+      }
+      .header{
+        text-align:center;
+        font-size: 150%;
       }
       .lastweek_of_month{
         border-top: 1px solid var(--primary-text-color);
