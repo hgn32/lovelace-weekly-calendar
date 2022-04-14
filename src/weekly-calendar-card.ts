@@ -102,7 +102,7 @@ class WeeklyCalendarCard extends LitElement {
         24 * 60 * 60 * 1000,
     );
     const lastDayMonth = new Date(now.getFullYear(), now.getMonth()+1, 0);
-    const weekday_view[] = ['日','月','火','水','木','金','土'];
+    const weekday_view = ["日","月","火","水","木","金","土"];
 
     const headers: TemplateResult[] = [];
     const days: TemplateResult[] = [];
