@@ -174,14 +174,14 @@ class WeeklyCalendarCard extends LitElement {
       .firstweek_of_month{
         border-top: 2px solid var(--primary-text-color);
         border-right: 1px solid var(--primary-text-color);
-        border-bottom: 2px solid var(--primary-text-color);
+        border-bottom: 1px solid var(--primary-text-color);
         border-left: 1px solid var(--primary-text-color);
       }
       .firstday_of_month{
         border-top: 1px solid var(--primary-text-color);
         border-right: 1px solid var(--primary-text-color);
-        border-bottom: 2px solid var(--primary-text-color);
-        border-left: 2px solid var(--primary-text-color);
+        border-bottom: 1px solid var(--primary-text-color);
+        border-left: 1px solid var(--primary-text-color);
       }
       .day_normal{
         border: 1px solid var(--primary-text-color);
