@@ -85,8 +85,8 @@ class WeeklyCalendarCard extends LitElement {
         </ha-card>
       `;
     }
-
-    const today = new Date();
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth()+1, now.getDate());
     const startDay = new Date(
       today.getTime() -
         (today.getDay() -
@@ -166,8 +166,14 @@ class WeeklyCalendarCard extends LitElement {
       }
       .week {
       }
-      .start_month{
-        
+      .lastweek_of_month{
+        border-bottom: 2px solid #111111;
+      }
+      .firstweek_of_month{
+        border-top: 2px solid #111111;
+      }
+      .firstday_of_month{
+        border-left: 2px solid #111111;
       }
       .day {
         border: 1px solid #111111;
