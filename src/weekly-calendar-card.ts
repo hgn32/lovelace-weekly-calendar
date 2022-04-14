@@ -106,7 +106,7 @@ class WeeklyCalendarCard extends LitElement {
 
     const headers: TemplateResult[] = [];
     const days: TemplateResult[] = [];
-    let count: number = 0;
+    let count = 0;
     for (let currentDay = startDay; currentDay <= endDay; currentDay.setDate(currentDay.getDate() + 1)) {
       const class_list = ["day"];
       class_list.push("weekday" + String(currentDay.getDay()));
