@@ -113,7 +113,7 @@ class WeeklyCalendarCard extends LitElement {
       if(currentDay.getDate() === 1) class_list.push("firstday_of_month");
       // prettier-ignore
       days.push(html`
-        <div class="${class_list}">
+        <div class="${class_list.join(" ")}">
           <div>${currentDay.getDate()}</div>
         </div>
       `);
