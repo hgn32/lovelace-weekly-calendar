@@ -185,7 +185,7 @@ class WeeklyCalendarCard extends LitElement {
         vertical-align: middle;
         padding: 8px;
         margin: 0;
-        font-size: 150%;
+        font-size: 100%;
       }
       .lastweek_of_month{
         border-top: 1px solid var(--primary-text-color);
@@ -209,10 +209,10 @@ class WeeklyCalendarCard extends LitElement {
         border: 1px solid var(--primary-text-color);
       }
       .day {
-      	width: calc((100% / 7) - 19px);
+      	width: calc((100% / 7) - 21px);
         text-align: center;
         vertical-align: middle;
-        padding: 8px;
+        padding: 10px;
         margin: 0;
         font-size: 250%;
       }
