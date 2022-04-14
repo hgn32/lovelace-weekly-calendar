@@ -71,8 +71,6 @@ class WeeklyCalendarCard extends LitElement {
 
   protected render(): TemplateResult | void {
     if (!this._config || !this.hass) {
-      console.log(this._config);
-      console.log(this.hass);
       return html`
         <ha-card>
           <div class="warning">Setup is not completed.</div>
@@ -108,14 +106,14 @@ class WeeklyCalendarCard extends LitElement {
 
     const days: TemplateResult[] = [];
     for (let currentDay = startDay; currentDay <= endDay; currentDay.setDate(currentDay.getDate() + 1)) {
-      const isToday = currentDay.getTime() === today.getTime() ? true : false;
+      const isToday = currentDay.getTime() == today.getTime() ? true : false;
       const tomorrow = new Date(currentDay.getDate() + 1);
       const isStartOfWeek = currentDay.getDay() === this._config.start_weekday ? true : false;
       const isEndOfWeek = tomorrow.getDay() === this._config.start_weekday ? true : false;
       // prettier-ignore
       days.push(html`
         ${isStartOfWeek ? html`<tr class="week">` : html``}
-        <td class="day weekday${currentDay.getDay()}" ${isToday ? 'today' : ''}>
+        <td class="day weekday${currentDay.getDay()}" ${isToday ? 'today' : ''}">
           <div>${currentDay.getDate()}</div>
         </td>
         ${isEndOfWeek ? html`</tr>` : html``}
@@ -163,10 +161,16 @@ class WeeklyCalendarCard extends LitElement {
         padding: 8px;
       }
       .calendar {
+        width: 100%;
+        border-collapse: collapse;
       }
       .week {
       }
+      .start_month{
+        
+      }
       .day {
+        border: 1px solid #111111;
         text-align: center;
         vertical-align: middle;
         padding: 8px;
