@@ -13,7 +13,6 @@ import { HomeAssistant } from 'custom-card-helpers';
 
 import { WeeklyCalendarCardConfig } from './types';
 
-@customElement('weekly-calendar-card')
 class WeeklyCalendarCard extends LitElement {
   @property() public hass?: HomeAssistant;
   @property() private _config?: WeeklyCalendarCardConfig;
