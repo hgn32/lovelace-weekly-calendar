@@ -168,8 +168,6 @@ class WeeklyCalendarCard extends LitElement {
         width: 100%;
         border-collapse: collapse;
       }
-      .week {
-      }
       .lastweek_of_month{
         border-bottom: 2px solid #111111;
       }
