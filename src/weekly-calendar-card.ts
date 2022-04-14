@@ -153,7 +153,7 @@ class WeeklyCalendarCard extends LitElement {
   static get styles() {
     return css`
       ha-card {
-        padding: 16px;
+        padding: 4px;
       }
       .warning {
         display: block;
@@ -164,6 +164,7 @@ class WeeklyCalendarCard extends LitElement {
       .calendar {
         display: flex;
         flex-wrap: wrap;
+        width: 100%;
       }
       .lastweek_of_month{
         border-top: 1px solid var(--primary-text-color);
@@ -192,7 +193,7 @@ class WeeklyCalendarCard extends LitElement {
         vertical-align: middle;
         padding: 8px;
         margin: 0;
-        font-size: 150%;
+        font-size: 250%;
       }
     `;
   }
