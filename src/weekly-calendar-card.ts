@@ -117,7 +117,7 @@ class WeeklyCalendarCard extends LitElement {
       // prettier-ignore
       days.push(html`
         ${isStartOfWeek ? html`<tr class="week">` : html``}
-        <td class="day weekday${currentDay.getDay()}" ${isToday ? 'today' : ''} ${isFirstDay ? 'firstday_of_month' : ''} ${isLastWeek ? 'lastweek_of_month' : ''} ${isFirstWeek ? 'firstweek_of_month' : ''}">
+        <td class="day weekday${currentDay.getDay()}" ${isToday ? html`today` : html`` } ${isFirstDay ? html`firstday_of_month` : html``} ${isLastWeek ? html`lastweek_of_month` : html``} ${isFirstWeek ? html`firstweek_of_month` : html``}">
           <div>${currentDay.getDate()}</div>
         </td>
         ${isEndOfWeek ? html`</tr>` : html``}
