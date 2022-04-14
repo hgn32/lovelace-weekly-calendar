@@ -15,7 +15,7 @@ import { WeeklyCalendarCardConfig } from './types';
 
 @customElement('weekly-calendar-card')
 class WeeklyCalendarCard extends LitElement {
-  @property() public _hass?: HomeAssistant;
+  @property() public hass?: HomeAssistant;
   @property() private _config?: WeeklyCalendarCardConfig;
 
   public setConfig(config_org: Readonly<WeeklyCalendarCardConfig>): void {
@@ -59,11 +59,11 @@ class WeeklyCalendarCard extends LitElement {
       return true;
     }
 
-    if (this._hass && this._config) {
+    if (this.hass && this._config) {
       const oldHass = changedProps.get('hass') as HomeAssistant | undefined;
 
       if (oldHass) {
-        return oldHass.states[this._config.entity] !== this._hass.states[this._config.entity];
+        return oldHass.states[this._config.entity] !== this.hass.states[this._config.entity];
       }
     }
 
@@ -71,10 +71,16 @@ class WeeklyCalendarCard extends LitElement {
   }
 
   protected render(): TemplateResult | void {
-    if (!this._config || !this._hass) {
-      return html``;
+    if (!this._config || !this.hass) {
+      console.log(this._config);
+      console.log(this.hass);
+      return html`
+        <ha-card>
+          <div class="warning">Setup is not completed.</div>
+        </ha-card>
+      `;
     }
-    const stateObj = this._hass.states[this._config.entity];
+    const stateObj = this.hass.states[this._config.entity];
     if (!stateObj) {
       return html`
         <ha-card>
