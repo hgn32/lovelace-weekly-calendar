@@ -141,7 +141,7 @@ class WeeklyCalendarCard extends LitElement {
           ${style_today}
           ${style_weekdays}
         </style>
-        <div calss="calendar">
+        <div class="calendar">
           ${days}
         </div>
       </ha-card>
