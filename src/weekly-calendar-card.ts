@@ -25,24 +25,10 @@ class WeeklyCalendarCard extends LitElement {
       show_last_weeks: config_org.show_last_weeks ? config_org.show_last_weeks : 1,
       show_follow_weeks: config_org.show_follow_weeks ? config_org.show_follow_weeks : 2,
       start_weekday: config_org.start_weekday ? config_org.start_weekday : 0,
-      today_background_color: config_org.today_background_color ? config_org.today_background_color : '#ff0000',
-      today_text_color: config_org.today_text_color ? config_org.today_text_color : '#000000',
-      weekday_background_color: config_org.weekday_background_color
-        ? config_org.weekday_background_color
-        : [
-            {
-              //Sun
-              weekday: 0,
-              background_color: '#ff0000',
-              text_color: '#000000',
-            },
-            {
-              //Sat
-              weekday: 6,
-              background_color: '#0000ff',
-              text_color: '#000000',
-            },
-          ],
+      border_color: config_org.border_color ? config_org.border_color : 'var(--primary-text-color)',
+      today_background_color: config_org.today_background_color ? config_org.today_background_color : 'var(--label-badge-background-color)',
+      today_text_color: config_org.today_text_color ? config_org.today_text_color : 'var(--primary-text-color)',
+      weekday_background_color: config_org.weekday_background_color ? config_org.weekday_background_color : [],
     };
     this._config = config;
   }
@@ -133,6 +119,9 @@ class WeeklyCalendarCard extends LitElement {
     }
 
     const style_today = css`
+      :root {
+        --wccard-border-color: ${unsafeCSS(this._config.border_color)};
+      }
       .today {
         background-color: ${unsafeCSS(this._config.today_background_color)};
         color: ${unsafeCSS(this._config.today_text_color)};
@@ -177,42 +166,43 @@ class WeeklyCalendarCard extends LitElement {
         display: flex;
         flex-wrap: wrap;
         width: 100%;
+        justify-content: center;
       }
       .header{
-        border: 1px solid var(--primary-text-color);
+        border: 1px solid var(--wccard-border-color);
       	width: calc((100% / 7) - 19px);
         text-align: center;
         vertical-align: middle;
-        padding: 8px;
+        padding: 4px 8px;
         margin: 0;
         font-size: 100%;
       }
       .lastweek_of_month{
-        border-top: 1px solid var(--primary-text-color);
-        border-right: 1px solid var(--primary-text-color);
-        border-bottom: 2px solid var(--primary-text-color);
-        border-left: 1px solid var(--primary-text-color);
+        border-top: 1px solid var(--wccard-border-color);
+        border-right: 1px solid var(--wccard-border-color);
+        border-bottom: 2px solid var(--wccard-border-color);
+        border-left: 1px solid var(--wccard-border-color);
       }
       .firstweek_of_month{
-        border-top: 2px solid var(--primary-text-color);
-        border-right: 1px solid var(--primary-text-color);
-        border-bottom: 1px solid var(--primary-text-color);
-        border-left: 1px solid var(--primary-text-color);
+        border-top: 2px solid var(--wccard-border-color);
+        border-right: 1px solid var(--wccard-border-color);
+        border-bottom: 1px solid var(--wccard-border-color);
+        border-left: 1px solid var(--wccard-border-color);
       }
       .firstday_of_month{
-        border-top: 1px solid var(--primary-text-color);
-        border-right: 1px solid var(--primary-text-color);
-        border-bottom: 1px solid var(--primary-text-color);
-        border-left: 1px solid var(--primary-text-color);
+        border-top: 1px solid var(--wccard-border-color);
+        border-right: 1px solid var--wccard-border-color);
+        border-bottom: 1px solid var(--wccard-border-color);
+        border-left: 1px solid var(--wccard-border-color);
       }
       .day_normal{
-        border: 1px solid var(--primary-text-color);
+        border: 1px solid var(--wccard-border-color);
       }
       .day {
       	width: calc((100% / 7) - 23px);
         text-align: center;
         vertical-align: middle;
-        padding: 10px;
+        padding: 15px 10px;
         margin: 0;
         font-size: 250%;
       }
