@@ -105,7 +105,7 @@ class WeeklyCalendarCard extends LitElement {
       if(count++ < 7){
         // prettier-ignore
         headers.push(html`
-          <div class="header">
+          <div class="header day_normal">
             <div>${weekday_view[currentDay.getDay()]}</div>
           </div>
         `);
@@ -118,9 +118,27 @@ class WeeklyCalendarCard extends LitElement {
       `);
     }
 
-    const style_today = css`
-      :root {
-        --wccard-border-color: ${unsafeCSS(this._config.border_color)};
+    const style_today = css`    
+      .lastweek_of_month{
+        border-top:    1px solid ${unsafeCSS(this._config.border_color)};
+        border-right:  1px solid ${unsafeCSS(this._config.border_color)};
+        border-bottom: 2px solid ${unsafeCSS(this._config.border_color)};
+        border-left:   1px solid ${unsafeCSS(this._config.border_color)};
+      }
+      .firstweek_of_month{
+        border-top:    2px solid ${unsafeCSS(this._config.border_color)};
+        border-right:  1px solid ${unsafeCSS(this._config.border_color)};
+        border-bottom: 1px solid ${unsafeCSS(this._config.border_color)};
+        border-left:   1px solid ${unsafeCSS(this._config.border_color)};
+      }
+      .firstday_of_month{
+        border-top:    1px solid ${unsafeCSS(this._config.border_color)};
+        border-right:  1px solid ${unsafeCSS(this._config.border_color)};
+        border-bottom: 1px solid ${unsafeCSS(this._config.border_color)};
+        border-left:   1px solid ${unsafeCSS(this._config.border_color)};
+      }
+      .day_normal{
+        border: 1px solid ${unsafeCSS(this._config.border_color)};
       }
       .today {
         background-color: ${unsafeCSS(this._config.today_background_color)};
@@ -169,37 +187,15 @@ class WeeklyCalendarCard extends LitElement {
         justify-content: center;
       }
       .header{
-        border: 1px solid var(--wccard-border-color);
-      	width: calc((100% / 7) - 19px);
+      	width: calc((100% / 7) - 20px);
         text-align: center;
         vertical-align: middle;
-        padding: 4px 8px;
+        padding: 4px 10px;
         margin: 0;
         font-size: 100%;
       }
-      .lastweek_of_month{
-        border-top: 1px solid var(--wccard-border-color);
-        border-right: 1px solid var(--wccard-border-color);
-        border-bottom: 2px solid var(--wccard-border-color);
-        border-left: 1px solid var(--wccard-border-color);
-      }
-      .firstweek_of_month{
-        border-top: 2px solid var(--wccard-border-color);
-        border-right: 1px solid var(--wccard-border-color);
-        border-bottom: 1px solid var(--wccard-border-color);
-        border-left: 1px solid var(--wccard-border-color);
-      }
-      .firstday_of_month{
-        border-top: 1px solid var(--wccard-border-color);
-        border-right: 1px solid var--wccard-border-color);
-        border-bottom: 1px solid var(--wccard-border-color);
-        border-left: 1px solid var(--wccard-border-color);
-      }
-      .day_normal{
-        border: 1px solid var(--wccard-border-color);
-      }
       .day {
-      	width: calc((100% / 7) - 23px);
+      	width: calc((100% / 7) - 20px);
         text-align: center;
         vertical-align: middle;
         padding: 15px 10px;
