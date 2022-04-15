@@ -101,11 +101,11 @@ class WeeklyCalendarCard extends LitElement {
       if(currentDay.getTime() === today.getTime()) class_list.push("today");
       if(currentDay.getDate() === 1) class_list.push("firstday_of_month");
       if(!class_list.includes("firstday_of_month") && !class_list.includes("firstweek_of_month") && !class_list.includes("lastweek_of_month"))
-          class_list.push("day_normal");
+          class_list.push("day_base");
       if(count++ < 7){
         // prettier-ignore
         headers.push(html`
-          <div class="header day_normal">
+          <div class="header day_base">
             <div>${weekday_view[currentDay.getDay()]}</div>
           </div>
         `);
@@ -137,8 +137,12 @@ class WeeklyCalendarCard extends LitElement {
         border-bottom: 1px solid ${unsafeCSS(this._config.border_color)};
         border-left:   1px solid ${unsafeCSS(this._config.border_color)};
       }
-      .day_normal{
+      .day_base{
         border: 1px solid ${unsafeCSS(this._config.border_color)};
+      	width: calc((100% / 7) - 22px);
+        text-align: center;
+        vertical-align: middle;
+        margin: 0;
       }
       .today {
         background-color: ${unsafeCSS(this._config.today_background_color)};
@@ -187,19 +191,11 @@ class WeeklyCalendarCard extends LitElement {
         justify-content: center;
       }
       .header{
-      	width: calc((100% / 7) - 20px);
-        text-align: center;
-        vertical-align: middle;
         padding: 4px 10px;
-        margin: 0;
         font-size: 100%;
       }
       .day {
-      	width: calc((100% / 7) - 20px);
-        text-align: center;
-        vertical-align: middle;
         padding: 15px 10px;
-        margin: 0;
         font-size: 250%;
       }
     `;
