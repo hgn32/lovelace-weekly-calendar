@@ -37,5 +37,5 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: dist/weekly-calendar-card.js
           asset_name: weekly-calendar-card.js
-          tag: ${{ steps.package-version.outputs.version }}
+          tag: v${{ steps.package-version.outputs.version }}
           overwrite: true
