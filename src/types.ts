@@ -8,7 +8,7 @@ export interface WeeklyCalendarCardConfig extends LovelaceCardConfig {
     start_weekday: number;
     today_background_color: string;
     today_text_color: string;
-    border_color: striong;
+    border_color: string;
     weekday_background_color: WeekdayBackgroundColorConfig[];
 }
 
