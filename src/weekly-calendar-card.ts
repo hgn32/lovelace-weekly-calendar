@@ -25,8 +25,8 @@ class WeeklyCalendarCard extends LitElement {
       show_last_weeks: config_org.show_last_weeks ? config_org.show_last_weeks : 1,
       show_follow_weeks: config_org.show_follow_weeks ? config_org.show_follow_weeks : 2,
       start_weekday: config_org.start_weekday ? config_org.start_weekday : 0,
-      border_color: config_org.border_color ? config_org.border_color : "var(--primary-text-color)",
       today_background_color: config_org.today_background_color ? config_org.today_background_color : 'var(--label-badge-background-color)',
+      border_color: config_org.border_color ? config_org.border_color : 'var(--primary-text-color)',
       today_text_color: config_org.today_text_color ? config_org.today_text_color : 'var(--primary-text-color)',
       weekday_background_color: config_org.weekday_background_color ? config_org.weekday_background_color : [],
     };
