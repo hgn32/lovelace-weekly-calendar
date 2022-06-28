@@ -129,24 +129,18 @@ class WeeklyCalendarCard extends LitElement {
                 `;
             }
         }
-        const now = dayjs();
-        const today = dayjs(now.format('YYYY-MM-DD'));
-        const startDay = dayjs(
-            today.unix() -
-                (today.day() -
-                    this._config.start_weekday +
-                    (today.day() >= this._config.start_weekday ? 0 : 7) +
-                    7 * this._config.show_last_weeks) *
-                    24 *
-                    60 *
-                    60 *
-                    1000,
-        );
-        const endDay = dayjs(
-            startDay.unix() +
-                (this._config.show_last_weeks + this._config.show_follow_weeks + 1) * 7 * 24 * 60 * 60 * 1000 -
-                24 * 60 * 60 * 1000,
-        );
+        const today = dayjs(dayjs().format('YYYY-MM-DD'));
+        const startDay = today
+            .subtract(
+                today.day() - this._config.start_weekday + (today.day() >= this._config.start_weekday ? 0 : 7),
+                'd',
+            )
+            .subtract(this._config.show_last_weeks, 'w');
+
+        const endDay = today
+            .add(today.day() + this._config.start_weekday, 'd')
+            .add(this._config.show_follow_weeks, 'w');
+
         const lastDayMonth = today.endOf('month');
         const weekday_view = ['日', '月', '火', '水', '木', '金', '土'];
 
