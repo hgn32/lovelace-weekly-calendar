@@ -1,7 +1,8 @@
 import typescript from 'rollup-plugin-typescript2';
-import babel from 'rollup-plugin-babel';
-import commonjs from '@rollup/plugin-commonjs';
 import { terser } from 'rollup-plugin-terser';
+import babel from '@rollup/plugin-babel';
+import resolve from '@rollup/plugin-node-resolve';
+import commonjs from '@rollup/plugin-commonjs';
 
 export default {
     input: ['src/weekly-calendar-card.ts'],
@@ -13,8 +14,10 @@ export default {
         typescript(),
         babel({
             exclude: 'node_modules/**',
+            babelHelpers: 'bundled',
         }),
-        terser(),
+        resolve(),
         commonjs(),
+        terser(),
     ],
 };
