@@ -3,10 +3,10 @@
 [![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg?style=for-the-badge)](https://github.com/hacs/integration)
 
 ## Under development!!
-- TODO: show events
-- TODO: auto update
+## TODO
+- show events
 
-## Install 
+## Install
 HACS custom repository
 
 ## Sample

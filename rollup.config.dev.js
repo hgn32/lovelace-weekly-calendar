@@ -9,10 +9,9 @@ export default {
         format: 'es',
     },
     plugins: [
-        resolve(),
         typescript(),
         serve({
-            contentBase: './dist',
+            contentBase: './',
             host: '0.0.0.0',
             port: 5000,
             allowCrossOrigin: true,
@@ -22,3 +21,4 @@ export default {
         }),
     ],
 };
+ 
