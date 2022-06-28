@@ -1,6 +1,6 @@
 import { LitElement, html, property, TemplateResult, css, PropertyValues, unsafeCSS } from 'lit-element';
 import { HomeAssistant } from 'custom-card-helpers';
-import dayjs from 'dayjs';
+import dayjs from 'dayjs/esm';
 import { CalendarConfig, WeeklyCalendarCardConfig } from './types';
 
 class WeeklyCalendarCard extends LitElement {
