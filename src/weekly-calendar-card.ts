@@ -137,9 +137,9 @@ class WeeklyCalendarCard extends LitElement {
             )
             .subtract(this._config.show_last_weeks, 'w');
 
-        const endDay = today
-            .add(today.day() + this._config.start_weekday, 'd')
-            .add(this._config.show_follow_weeks, 'w');
+        const endDay = startDay
+            .add(this._config.show_last_weeks + this._config.show_follow_weeks + 1, 'w')
+            .subtract(1, 'd');
 
         const lastDayMonth = today.endOf('month');
         const weekday_view = ['日', '月', '火', '水', '木', '金', '土'];
