@@ -14,7 +14,7 @@ export interface WeeklyCalendarCardConfig extends LovelaceCardConfig {
 
 export interface CalendarConfig {
     entity: string;
-    match_title: '';
+    match_title: string;
     background_color: string;
 }
 
