@@ -10,7 +10,7 @@ class WeeklyCalendarCard extends LitElement {
     public setConfig(config_org: Readonly<WeeklyCalendarCardConfig>): void {
         const config: WeeklyCalendarCardConfig = {
             type: config_org.type,
-            calendars: config_org.calendars,
+            calendars: config_org.calendars ? config_org.calendars : [],
             show_last_weeks: config_org.show_last_weeks ? config_org.show_last_weeks : 1,
             show_follow_weeks: config_org.show_follow_weeks ? config_org.show_follow_weeks : 2,
             start_weekday: config_org.start_weekday ? config_org.start_weekday : 0,
@@ -106,7 +106,8 @@ class WeeklyCalendarCard extends LitElement {
             `;
         }
 
-        if (this._config.calendars) {
+        if (this._config.calendars && this.hass) {
+            console.log('ch calendar');
             const invalidEntities = this._config.calendars.filter((calendar: CalendarConfig) => {
                 const stateObj = this.hass?.states[calendar.entity];
                 if (!stateObj) {
@@ -114,6 +115,8 @@ class WeeklyCalendarCard extends LitElement {
                 }
                 return false;
             });
+            console.log('chd calendar');
+            console.log(invalidEntities);
             if (invalidEntities.length > 0) {
                 return html`
                     <ha-card>
@@ -143,7 +146,8 @@ class WeeklyCalendarCard extends LitElement {
         const lastDayMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
         const weekday_view = ['日', '月', '火', '水', '木', '金', '土'];
 
-        // const events = await this.getAllEvents(startDay, endDay, this._config);
+        console.log('bef events');
+        const events = await this.getAllEvents(startDay, endDay, this._config);
 
         const headers: TemplateResult[] = [];
         const days: TemplateResult[] = [];
