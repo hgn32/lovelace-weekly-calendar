@@ -114,7 +114,7 @@ class WeeklyCalendarCard extends LitElement {
                 }
                 return false;
             });
-            if (invalidEntities) {
+            if (invalidEntities.length > 0) {
                 return html`
                     <ha-card>
                         <div class="warning">Entity not available: ${invalidEntities.join(', ')}</div>
@@ -143,8 +143,7 @@ class WeeklyCalendarCard extends LitElement {
         const lastDayMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
         const weekday_view = ['日', '月', '火', '水', '木', '金', '土'];
 
-        const events = await this.getAllEvents(startDay, endDay, this._config);
-        console.log(events);
+        // const events = await this.getAllEvents(startDay, endDay, this._config);
 
         const headers: TemplateResult[] = [];
         const days: TemplateResult[] = [];
