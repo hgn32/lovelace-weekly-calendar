@@ -1,7 +1,7 @@
 import { LitElement, html, property, TemplateResult, css, PropertyValues, unsafeCSS } from 'lit-element';
 import { HomeAssistant } from 'custom-card-helpers';
-import dayjs from 'dayjs/esm';
 import { CalendarConfig, WeeklyCalendarCardConfig } from './types';
+import dayjs from 'dayjs';
 
 class WeeklyCalendarCard extends LitElement {
     @property() public hass?: HomeAssistant;
@@ -149,18 +149,17 @@ class WeeklyCalendarCard extends LitElement {
         const lastDayMonth = today.endOf('month');
         const weekday_view = ['日', '月', '火', '水', '木', '金', '土'];
 
-        console.log('bef events');
         // const events = await this.getAllEvents(startDay, endDay, this._config);
 
         const headers: TemplateResult[] = [];
         const days: TemplateResult[] = [];
         let count = 0;
-        for (let currentDay = startDay; currentDay <= endDay; currentDay.date(currentDay.date() + 1)) {
+        for (let currentDay = startDay; currentDay <= endDay; currentDay = currentDay.add(1, 'day')) {
             const class_list = ['day', 'day_base'];
             class_list.push('weekday' + String(currentDay.day()));
             if (currentDay.date() + 7 - currentDay.day() > lastDayMonth.date()) class_list.push('lastweek_of_month');
             if (currentDay.date() - currentDay.day() < 0) class_list.push('firstweek_of_month');
-            if (currentDay.unix() === today.unix()) class_list.push('today');
+            if (currentDay.format('YYY-MM-DD') === today.format('YYY-MM-DD')) class_list.push('today');
             if (currentDay.date() === 1) class_list.push('firstday_of_month');
             if (
                 !class_list.includes('firstday_of_month') &&

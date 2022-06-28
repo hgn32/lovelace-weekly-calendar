@@ -1,7 +1,7 @@
 {
     "name": "weekly-calendar-card",
     "lockfileVersion": 2,
-    "version": "0.1.6",
+    "version": "0.1.2",
     "requires": true,
     "module": "weekly-calendar-card.js",
     "description": "",
@@ -29,6 +29,7 @@
         "start": "rollup -c rollup.config.dev.js --watch"
     },
     "dependencies": {
+        "@rollup/plugin-commonjs": "^22.0.1",
         "custom-card-helpers": "^1.9.0",
         "dayjs": "^1.11.3",
         "home-assistant-js-websocket": "^7.0.2",
