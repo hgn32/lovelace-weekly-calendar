@@ -1,6 +1,6 @@
 import { LitElement, html, property, TemplateResult, css, PropertyValues, unsafeCSS } from 'lit-element';
 import { HomeAssistant } from 'custom-card-helpers';
-
+import dayjs from 'dayjs';
 import { CalendarConfig, WeeklyCalendarCardConfig } from './types';
 
 class WeeklyCalendarCard extends LitElement {
@@ -44,7 +44,11 @@ class WeeklyCalendarCard extends LitElement {
         return true;
     }
 
-    protected async getAllEvents(startDay: Date, endDay: Date, config: WeeklyCalendarCardConfig): Promise<any> {
+    protected async getAllEvents(
+        startDay: dayjs.Dayjs,
+        endDay: dayjs.Dayjs,
+        config: WeeklyCalendarCardConfig,
+    ): Promise<any> {
         const calendarEntityPromises: Promise<any>[] = [];
         const allEvents: any[] = [];
         const failedEvents: any[] = [];
@@ -53,7 +57,9 @@ class WeeklyCalendarCard extends LitElement {
 
         config.calendars.map((calendar) => {
             const calendarEntity = calendar;
-            const url: string = `calendars/${calendar.entity}?start=${startDay}Z&end=${endDay}Z`;
+            const url: string = `calendars/${calendar.entity}?start=${startDay.format(
+                'YYYY-MM-DDTHH:mm:ss',
+            )}Z&end=${endDay.format('YYYY-MM-DDTHH:mm:ss')}Z`;
             if (!this.hass) return;
             calendarEntityPromises.push(
                 this.hass
@@ -107,7 +113,6 @@ class WeeklyCalendarCard extends LitElement {
         }
 
         if (this._config.calendars && this.hass) {
-            console.log('ch calendar');
             const invalidEntities = this._config.calendars.filter((calendar: CalendarConfig) => {
                 const stateObj = this.hass?.states[calendar.entity];
                 if (!stateObj) {
@@ -115,8 +120,6 @@ class WeeklyCalendarCard extends LitElement {
                 }
                 return false;
             });
-            console.log('chd calendar');
-            console.log(invalidEntities);
             if (invalidEntities.length > 0) {
                 return html`
                     <ha-card>
@@ -125,41 +128,40 @@ class WeeklyCalendarCard extends LitElement {
                 `;
             }
         }
-        const now = new Date();
-        const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-        const startDay = new Date(
-            today.getTime() -
-                (today.getDay() -
+        const now = dayjs();
+        const today = dayjs(now.format('YYYY-MM-DD'));
+        const startDay = dayjs(
+            today.unix() -
+                (today.day() -
                     this._config.start_weekday +
-                    (today.getDay() >= this._config.start_weekday ? 0 : 7) +
+                    (today.day() >= this._config.start_weekday ? 0 : 7) +
                     7 * this._config.show_last_weeks) *
                     24 *
                     60 *
                     60 *
                     1000,
         );
-        const endDay = new Date(
-            startDay.getTime() +
+        const endDay = dayjs(
+            startDay.unix() +
                 (this._config.show_last_weeks + this._config.show_follow_weeks + 1) * 7 * 24 * 60 * 60 * 1000 -
                 24 * 60 * 60 * 1000,
         );
-        const lastDayMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+        const lastDayMonth = today.endOf('month');
         const weekday_view = ['日', '月', '火', '水', '木', '金', '土'];
 
         console.log('bef events');
-        const events = await this.getAllEvents(startDay, endDay, this._config);
+        // const events = await this.getAllEvents(startDay, endDay, this._config);
 
         const headers: TemplateResult[] = [];
         const days: TemplateResult[] = [];
         let count = 0;
-        for (let currentDay = startDay; currentDay <= endDay; currentDay.setDate(currentDay.getDate() + 1)) {
+        for (let currentDay = startDay; currentDay <= endDay; currentDay.date(currentDay.date() + 1)) {
             const class_list = ['day', 'day_base'];
-            class_list.push('weekday' + String(currentDay.getDay()));
-            if (currentDay.getDate() + 7 - currentDay.getDay() > lastDayMonth.getDate())
-                class_list.push('lastweek_of_month');
-            if (currentDay.getDate() - currentDay.getDay() < 0) class_list.push('firstweek_of_month');
-            if (currentDay.getTime() === today.getTime()) class_list.push('today');
-            if (currentDay.getDate() === 1) class_list.push('firstday_of_month');
+            class_list.push('weekday' + String(currentDay.day()));
+            if (currentDay.date() + 7 - currentDay.day() > lastDayMonth.date()) class_list.push('lastweek_of_month');
+            if (currentDay.date() - currentDay.day() < 0) class_list.push('firstweek_of_month');
+            if (currentDay.unix() === today.unix()) class_list.push('today');
+            if (currentDay.date() === 1) class_list.push('firstday_of_month');
             if (
                 !class_list.includes('firstday_of_month') &&
                 !class_list.includes('firstweek_of_month') &&
@@ -170,14 +172,14 @@ class WeeklyCalendarCard extends LitElement {
                 // prettier-ignore
                 headers.push(html`
           <div class="header day_base border_base">
-            <div>${weekday_view[currentDay.getDay()]}</div>
+            <div>${weekday_view[currentDay.day()]}</div>
           </div>
         `);
             }
             // prettier-ignore
             days.push(html`
         <div class="${class_list.join(" ")}">
-          <div>${currentDay.getDate()}</div>
+          <div>${currentDay.date()}</div>
         </div>
       `);
         }
