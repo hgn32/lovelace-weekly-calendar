@@ -104,7 +104,7 @@ class WeeklyCalendarCard extends LitElement {
 
         return newEvents;
     }
-    protected async render(): Promise<TemplateResult | void> {
+    protected render(): TemplateResult | void {
         if (!this._config || !this.hass) {
             return html`
                 <ha-card>
@@ -150,7 +150,7 @@ class WeeklyCalendarCard extends LitElement {
         const lastDayMonth = today.endOf('month');
         const weekday_view = ['日', '月', '火', '水', '木', '金', '土'];
 
-        // const events = await this.getAllEvents(startDay, endDay, this._config);
+        // const events = this.getAllEvents(startDay, endDay, this._config);
 
         const headers: TemplateResult[] = [];
         const days: TemplateResult[] = [];
