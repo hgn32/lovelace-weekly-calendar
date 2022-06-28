@@ -1,4 +1,5 @@
-import { LitElement, html, property, TemplateResult, css, PropertyValues, unsafeCSS } from 'lit-element';
+import { LitElement, html, TemplateResult, css, PropertyValues, unsafeCSS } from 'lit';
+import { property } from 'lit/decorators.js';
 import { HomeAssistant } from 'custom-card-helpers';
 import { CalendarConfig, WeeklyCalendarCardConfig } from './types';
 import dayjs from 'dayjs';
